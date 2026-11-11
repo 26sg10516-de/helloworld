@@ -1,3 +1,4 @@
 {
+  "regions": ["icn1"],
   "functions": { "api/proxy.js": { "maxDuration": 30 } }
 }
