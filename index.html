@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>​</title>
+<style>
+  html,body{height:100%;margin:0;background:#fff}
+  body{display:flex;align-items:center;justify-content:center}
+  input{width:min(90vw,520px);padding:14px 18px;border:1px solid #ddd;border-radius:999px;font-size:1rem;outline:none}
+  input:focus{border-color:#999}
+</style>
+</head>
+<body>
+<form id="f"><input id="u" autocomplete="off" autocapitalize="off" autofocus></form>
+<script>
+  function enc(s){return btoa(unescape(encodeURIComponent(s))).replace(/\+/g,'-').replace(/\//g,'_').replace(/=+$/,'');}
+  function go(url){location.replace('/api/proxy?u='+enc(url));}
+  var q=location.search.slice(1);
+  if(q){try{var d=decodeURIComponent(escape(atob(q.replace(/-/g,'+').replace(/_/g,'/'))));if(/^https?:\/\//i.test(d))go(d);}catch(e){}}
+  document.getElementById('f').addEventListener('submit',function(e){
+    e.preventDefault();
+    var v=document.getElementById('u').value.trim();
+    if(!v)return;
+    if(!/^https?:\/\//i.test(v))v='https://'+v;
+    go(v);
+  });
+</script>
+</body>
+</html>
